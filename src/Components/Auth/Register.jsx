@@ -15,9 +15,8 @@ const Register = () => {
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
-    const { email, password, name } = data; // Destructure the data object to get email, password, and name
+    const { email, password, name } = data;
     createUser(email, password, name).then((result) => {
-      // Pass name to createUser function
       toast.success("Account created successfully!");
       const loggedUser = result.user;
       console.log(loggedUser);
@@ -38,7 +37,7 @@ const Register = () => {
               <p className="mt-2 text-start text-sm text-gray-600">
                 Already have an account?{" "}
                 <Link to="/login">
-                  <span className="hover:text-blue-800 hover:underline">
+                  <span className="text-green-600 hover:text-blue-800 hover:underline">
                     Login
                   </span>
                 </Link>

@@ -29,7 +29,7 @@ const AuthProvider = ({ children }) => {
       return userCredential;
     } catch (error) {
       console.error("Error creating user:", error);
-      throw error; // Re-throw the error to handle it in the component
+      throw error;
     } finally {
       setLoading(false);
     }
@@ -56,13 +56,7 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       // console.log("current user", currentUser);
       if (currentUser) {
-        //  get token and store client
         const userInfo = { email: currentUser.email };
-        // axiosPublic.post("/jwt", userInfo).then((res) => {
-        //   if (res.data.token) {
-        //     localStorage.setItem("access-token", res.data.token);
-        //   }
-        // });
       } else {
         localStorage.removeItem("access-token");
       }

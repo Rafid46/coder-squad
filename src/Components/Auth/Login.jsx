@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { toast } from "react-toastify";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-
+import { PiEyeSlash, PiEye } from "react-icons/pi";
 const Login = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   //   const location = useLocation();
   const { user } = useContext(AuthContext);
@@ -56,7 +57,7 @@ const Login = () => {
             <p className="mt-2 text-start text-sm text-gray-600">
               Don't have an account?{" "}
               <Link to="/register">
-                <span className="hover:text-blue-800 hover:underline">
+                <span className="text-green-600 hover:text-blue-800 hover:underline">
                   Create a free account
                 </span>
               </Link>
@@ -89,13 +90,24 @@ const Login = () => {
                       Forgot password?
                     </a>
                   </div>
-                  <div className="mt-2">
+                  <div className="mt-2 relative">
                     <input
                       name="password"
                       placeholder="Password"
-                      type="password"
+                      type={showPassword ? "text" : "password"}
+                      required
                       className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                     />
+                    <span
+                      className="absolute top-[10px] right-5 text-xl"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? (
+                        <PiEye> </PiEye>
+                      ) : (
+                        <PiEyeSlash> </PiEyeSlash>
+                      )}
+                    </span>
                   </div>
                 </div>
                 <div>

@@ -66,7 +66,7 @@ const Navbar = () => {
             <button
               type="button"
               className="p-2 text-black transition-all duration-200 rounded-md md:hidden hover:text-white hover:bg-gray-800"
-              onClick={toggleMobileMenu} // Toggle mobile menu on button click
+              onClick={toggleMobileMenu}
             >
               <CiMenuBurger />
             </button>

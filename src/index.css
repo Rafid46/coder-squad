@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* fonts */
+@font-face {
+  font-family: "BrolimoRegular";
+  src: url("./fonts/BrolimoRegular.ttf");
+}
+@font-face {
+  font-family: "ArchivGroteskTrial-RegularTrial";
+  src: url("./fonts/ArchivGroteskTrial-RegularTrial.otf");
+}
+@font-face {
+  font-family: "NeueMontreal-Regular";
+  src: url("./fonts/NeueMontreal-Regular.ttf");
+}
+@font-face {
+  font-family: "FoundersGrotesk-Semibold";
+  src: url("./fonts/FoundersGrotesk-Semibold.ttf");
+}
+@font-face {
+  font-family: "Diastema Regular";
+  src: url("./fonts/Diastema\ Regular.ttf");
+}

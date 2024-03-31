@@ -1,6 +1,30 @@
-import { Link } from "react-router-dom";
+/* eslint-disable no-unused-vars */
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const Register = () => {
+  const { createUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+    const { email, password, name } = data; // Destructure the data object to get email, password, and name
+    createUser(email, password, name).then((result) => {
+      // Pass name to createUser function
+      toast.success("Account created successfully!");
+      const loggedUser = result.user;
+      console.log(loggedUser);
+      navigate("/");
+    });
+  };
+
   return (
     <div>
       <div className="font-poppins">
@@ -19,11 +43,27 @@ const Register = () => {
                   </span>
                 </Link>
               </p>
-              <form className="mt-8" method="POST" action="#">
+              <form className="mt-8" onSubmit={handleSubmit(onSubmit)}>
                 <div className="space-y-5">
                   <div>
+                    <label className="text-sm font-medium text-gray-900">
+                      Name
+                    </label>
                     <div className="mt-2">
                       <input
+                        {...register("name")}
+                        placeholder="name"
+                        className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium text-gray-900">
+                      Email
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        {...register("email")}
                         placeholder="Email"
                         type="email"
                         className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
@@ -31,8 +71,12 @@ const Register = () => {
                     </div>
                   </div>
                   <div>
+                    <label className="text-sm font-medium text-gray-900">
+                      Password
+                    </label>
                     <div className="mt-2">
                       <input
+                        {...register("password")}
                         placeholder="Password"
                         type="password"
                         className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
@@ -42,7 +86,7 @@ const Register = () => {
                   <div>
                     <button
                       className="inline-flex w-full items-center justify-center rounded-md bg-[#12372A] px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-[#007F73]"
-                      type="button"
+                      type="submit"
                     >
                       Sign up
                     </button>

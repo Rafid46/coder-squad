@@ -1,7 +1,49 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
+import { toast } from "react-toastify";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 
 const Login = () => {
+  const navigate = useNavigate();
+  //   const location = useLocation();
+  const { user } = useContext(AuthContext);
+  console.log(user?.displayName);
+  //   const from = location.state?.from?.pathname || "/";
+  const { signInUser } = useContext(AuthContext);
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider();
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    signInUser(email, password)
+      .then(() => {
+        toast.success("Login successful. Redirecting to the account page");
+        navigate("/");
+        return;
+      })
+      .catch((error) => {
+        toast.error("Invalid gmail, Please check your credentials");
+        return;
+      });
+  };
+  const handleGoogleSignIn = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        console.log(result.user);
+        toast.success("Login successful! Welcome back!");
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error("Login failed. Check your credentials.");
+      });
+  };
   return (
     <div className="font-poppins">
       <section>
@@ -19,7 +61,7 @@ const Login = () => {
                 </span>
               </Link>
             </p>
-            <form className="mt-8" method="POST" action="#">
+            <form onSubmit={handleLogin} className="mt-8">
               <div className="space-y-5">
                 <div>
                   <label className="text-sm font-medium text-gray-900">
@@ -27,6 +69,7 @@ const Login = () => {
                   </label>
                   <div className="mt-2">
                     <input
+                      name="email"
                       placeholder="Email"
                       type="email"
                       className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
@@ -48,6 +91,7 @@ const Login = () => {
                   </div>
                   <div className="mt-2">
                     <input
+                      name="password"
                       placeholder="Password"
                       type="password"
                       className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
@@ -57,7 +101,7 @@ const Login = () => {
                 <div>
                   <button
                     className="inline-flex w-full items-center justify-center rounded-md bg-[#12372A] px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-[#007F73]"
-                    type="button"
+                    type="submit"
                   >
                     Login
                   </button>
@@ -66,6 +110,7 @@ const Login = () => {
             </form>
             <div className="mt-3 space-y-3">
               <button
+                onClick={handleGoogleSignIn}
                 className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none"
                 type="button"
               >

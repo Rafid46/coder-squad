@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import {useContext, useEffect} from "react";
 import useAxios from "../Hooks/useAxios";
 
 import { useQuery } from "@tanstack/react-query";
@@ -7,13 +7,23 @@ import AllTasks from "../Components/Tasks/AllTasks";
 const Home = () => {
   const axiosPublic = useAxios();
   const user = useContext(AuthContext);
-  const { data: tasks = [] } = useQuery({
-    queryKey: ["tasks"],
+  const { data: tasks, refetch, isPending: loading } = useQuery({
+    queryKey: ["tasks-xyz"],
     queryFn: async () => {
-      const res = await axiosPublic.get(`/todo/tasks/?email=${user?.email}`);
-      return res.data;
+      if (user?.user?.email) {
+        const res = await axiosPublic.get(`/todo/tasks/?email=${user?.user?.email}`);
+        return res.data;
+      }
+
+      return null
     },
+    enabled: false
   });
+
+  useEffect(() => {
+    refetch()
+  }, [user?.user]);
+
   return (
     <div className="my-10 max-w-screen-2xl mx-auto">
       <div className="flex items-center">
@@ -40,7 +50,7 @@ const Home = () => {
         </p>
       </p>
       <div className="bg-cover bg-center h-[900px] py-10 rounded-lg">
-        <AllTasks></AllTasks>
+        <AllTasks loading={loading} tasks={tasks} refetch={refetch} />
       </div>
     </div>
   );

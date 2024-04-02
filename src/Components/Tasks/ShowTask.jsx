@@ -18,7 +18,7 @@ import useAxios from "../../Hooks/useAxios";
 import { AiFillEdit } from "react-icons/ai";
 import { MdOutlineDelete } from "react-icons/md";
 const ShowTask = ({ task, refetch }) => {
-  const queryClient = useQueryClient();
+  const [showFullDescription, setShowFullDescription] = useState(false);
   const axiosPublic = useAxios();
   //   const { data: tasks = [] } = useQuery({
   //     queryKey: ["tasks"],
@@ -82,6 +82,14 @@ const ShowTask = ({ task, refetch }) => {
       Swal.fire("Task complete");
     });
   };
+  const toggleDescription = () => {
+    setShowFullDescription(!showFullDescription);
+  };
+
+  const truncatedDescription =
+    task?.description.length > 24
+      ? task?.description.substring(0, 24) + "..."
+      : task?.description;
   return (
     <div>
       <div className="mt-10 w-96 rounded-[30px] bg-transparent m-5 border-2 border-gray-300 p-5 pt-5 pb-0">
@@ -147,7 +155,21 @@ const ShowTask = ({ task, refetch }) => {
                   }
                 ></textarea>
               ) : (
-                <span className="">{task?.description}</span>
+                <>
+                  {showFullDescription ? (
+                    <span>{task?.description}</span>
+                  ) : (
+                    <span>{truncatedDescription}</span>
+                  )}
+                  {task?.description.length > 24 && !editing && (
+                    <button
+                      onClick={toggleDescription}
+                      className="text-blue-500 ml-2 cursor-pointer focus:outline-none"
+                    >
+                      {showFullDescription ? "Show less" : "Show more"}
+                    </button>
+                  )}
+                </>
               )}
             </div>
           </div>

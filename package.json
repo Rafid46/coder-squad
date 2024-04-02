@@ -15,6 +15,7 @@
     "firebase": "^10.10.0",
     "framer-motion": "^11.0.24",
     "localforage": "^1.10.0",
+    "lottie-react": "^2.4.0",
     "match-sorter": "^6.3.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -23,7 +24,8 @@
     "react-router-dom": "^6.22.3",
     "react-toastify": "^10.0.5",
     "sort-by": "^1.2.0",
-    "sweetalert": "^2.1.2"
+    "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.10.7"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

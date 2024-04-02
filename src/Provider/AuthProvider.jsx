@@ -31,7 +31,7 @@ const AuthProvider = ({ children }) => {
       console.error("Error creating user:", error);
       throw error;
     } finally {
-      setLoading(false);
+      setLoading(true);
     }
   };
   //   sign in

@@ -19,12 +19,12 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    const taskCollection = client.db("todoApp").collection("tasks");
+    const taskCollection = client.db("coderTodo").collection("tasks");
     // get
     app.get("/todo/tasks", async (req, res) => {
       let query = {};
       if (req.query?.email) {
-        query = { email: req.query.email };
+        query = { email: req.query?.email };
       }
       const result = await taskCollection.find(query).toArray();
       res.send(result);
@@ -70,17 +70,17 @@ async function run() {
       console.log("update result", result);
       res.send(result);
     });
-    app.patch("/todo/tasks/complete/:id", async (req, res) => {
-      const id = req.params.id;
-      console.log(id);
-      const filter = { _id: new ObjectId(id) };
-      const updatedDoc = { $set: { status: "Completed" } };
-      const result = await taskCollection.updateOne(filter, updatedDoc);
-      console.log(updatedDoc);
-      res.send(result);
-    });
+    // app.patch("/todo/tasks/complete/:id", async (req, res) => {
+    //   const id = req.params.id;
+    //   console.log(id);
+    //   const filter = { _id: new ObjectId(id) };
+    //   const updatedDoc = { $set: { status: "Completed" } };
+    //   const result = await taskCollection.updateOne(filter, updatedDoc);
+    //   console.log(updatedDoc);
+    //   res.send(result);
+    // });
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    // await client.connect();
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log(

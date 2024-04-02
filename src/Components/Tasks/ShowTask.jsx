@@ -84,7 +84,7 @@ const ShowTask = ({ task, refetch }) => {
   };
   return (
     <div>
-      <div className="mt-10 w-96 rounded-md bg-transparent m-5 border-2 border-gray-300 p-5 pt-5 pb-0">
+      <div className="mt-10 w-96 rounded-[30px] bg-transparent m-5 border-2 border-gray-300 p-5 pt-5 pb-0">
         <div className="mb-5 shadow-lg backdrop-blur-sm bg-opacity-20 bg-white h-[90px] mx-auto gap-5 border-gray-400 rounded-md p-2">
           <div className="flex items-center justify-evenly mb-5">
             <h1
@@ -113,9 +113,9 @@ const ShowTask = ({ task, refetch }) => {
             )}
           </div>
         </div>
-        <div className="mb-8">
-          <h3 className="mt-1 mb-4 p-4 py-2 border-[1px]  border-gray-300 rounded-md text-sm text-white shadow-sm">
-            <span className="font-bold">Name : </span>
+        <div className="mb-8 min-h-[250px]">
+          <h3 className="mt-1 mb-4 p-4 py-2  text-sm text-white shadow-sm">
+            {/* <span className="font-bold">Name : </span> */}
             {editing ? (
               <input
                 onChange={(e) =>
@@ -196,7 +196,7 @@ const ShowTask = ({ task, refetch }) => {
             )}
           </p>
           <div>
-            {task?.status === "Todo" ? (
+            {task?.status === "Todo" && (
               <button
                 onClick={() => handleComplete(task)}
                 className="mt-2 overflow-hidden relative w-28  py-3  bg-[#190B14] text-white border-none rounded-md text-sm font-medium cursor-pointer group"
@@ -207,16 +207,6 @@ const ShowTask = ({ task, refetch }) => {
                 <span className="absolute w-28 h-28 -top-8 -left-2 bg-purple-600 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-1000 duration-500 origin-left"></span>
                 <span className="group-hover:opacity-100 group-hover:duration-1000 duration-100 opacity-0 absolute top-[12px] left-[20px] z-10">
                   Complete
-                </span>
-              </button>
-            ) : (
-              <button className="mt-2 overflow-hidden relative w-28  py-3  bg-purple-500 text-white border-none rounded-md text-sm font-medium cursor-pointer group">
-                Completed
-                <span className="absolute w-28 h-28 -top-8 -left-2 bg-white rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-left"></span>
-                <span className="absolute w-28 h-28 -top-8 -left-2 bg-purple-400 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-700 duration-700 origin-left"></span>
-                <span className="absolute w-28 h-28 -top-8 -left-2 bg-purple-600 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-1000 duration-500 origin-left"></span>
-                <span className="group-hover:opacity-100 group-hover:duration-1000 duration-100 opacity-0 absolute top-[12px] left-[20px] z-10">
-                  Completed
                 </span>
               </button>
             )}

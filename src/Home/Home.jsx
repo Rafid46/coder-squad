@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import useAxios from "../Hooks/useAxios";
 
 import { useQuery } from "@tanstack/react-query";
@@ -7,6 +7,7 @@ import AllTasks from "../Components/Tasks/AllTasks";
 const Home = () => {
   const axiosPublic = useAxios();
   const user = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(true); // Renamed to isLoading
   const {
     data: tasks,
     refetch,
@@ -22,12 +23,15 @@ const Home = () => {
       }
       return null;
     },
-    enabled: false,
+    enabled: !!user?.user?.email, // Enable query when user email is available
+    onSuccess: () => setIsLoading(false), // Update loading state when data is fetched
   });
-  console.log(JSON.stringify(user, null, 2));
+
   useEffect(() => {
-    refetch();
-  }, [user?.user?.email]);
+    if (!loading) {
+      setIsLoading(false); // Update loading state based on isPending
+    }
+  }, [loading]);
 
   return (
     <div className="my-10 max-w-screen-xl mx-auto">
@@ -49,7 +53,7 @@ const Home = () => {
         </p>
       </p>
       <div className="bg-cover bg-center h-[900px] py-10 rounded-lg">
-        {loading ? (
+        {isLoading ? (
           <p>Loading.....</p>
         ) : (
           <AllTasks loading={loading} tasks={tasks} refetch={refetch} />

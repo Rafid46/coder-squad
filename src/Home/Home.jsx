@@ -49,7 +49,11 @@ const Home = () => {
         </p>
       </p>
       <div className="bg-cover bg-center h-[900px] py-10 rounded-lg">
-        <AllTasks loading={loading} tasks={tasks} refetch={refetch} />
+        {loading ? (
+          <p>Loading.....</p>
+        ) : (
+          <AllTasks loading={loading} tasks={tasks} refetch={refetch} />
+        )}
       </div>
     </div>
   );

@@ -37,7 +37,7 @@ const AllTasks = ({ loading, tasks, refetch }) => {
             <p className=" text-white">create</p>
           </button>
         </div>
-        <CreateTask></CreateTask>
+        <CreateTask refetch={refetch}></CreateTask>
       </div>
     </div>
   );

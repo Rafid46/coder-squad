@@ -17,7 +17,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import useAxios from "../../Hooks/useAxios";
 import { AiFillEdit } from "react-icons/ai";
 import { MdOutlineDelete } from "react-icons/md";
-const ShowTask = ({ task }) => {
+const ShowTask = ({ task, refetch }) => {
+  const queryClient = useQueryClient();
   const axiosPublic = useAxios();
   //   const { data: tasks = [] } = useQuery({
   //     queryKey: ["tasks"],
@@ -42,8 +43,9 @@ const ShowTask = ({ task }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosPublic.delete(`/todo/tasks/${id}`).then((res) => {
+          refetch();
           console.log(res.data);
-          queryClient.invalidateQueries();
+
           Swal.fire({
             title: "Deleted!",
             text: "Your task has been deleted",
@@ -56,8 +58,8 @@ const ShowTask = ({ task }) => {
   //   update
   const handleUpdate = (id) => {
     axiosPublic.patch(`/todo/tasks/update/${id}`, inputValue).then((res) => {
+      refetch();
       console.log(res.data);
-      queryClient.invalidateQueries();
       Swal.fire({
         position: "bottom-end",
         icon: "success",
@@ -68,7 +70,7 @@ const ShowTask = ({ task }) => {
     });
     setEditing(false);
   };
-  const queryClient = useQueryClient();
+
   // complete
   const handleComplete = () => {
     // const complete = {
@@ -76,7 +78,7 @@ const ShowTask = ({ task }) => {
     // };
     axiosPublic.patch(`/todo/tasks/complete/${task._id}`).then((res) => {
       console.log(res);
-      queryClient.invalidateQueries();
+      refetch();
       Swal.fire("Task complete");
     });
   };
@@ -220,39 +222,46 @@ const ShowTask = ({ task }) => {
             )}
           </div>
         </div>
-        <div className="flex items-center justify-start mb-5">
+        <div className="flex items-center justify-center mb-5 relative">
           {editing ? (
             <div>
               <button
                 type="submit"
                 onClick={() => handleUpdate(task?._id)}
-                className="btn border-2 bg-transparent text-teal-400 mr-1"
+                className="btn border-2 bg-transparent text-teal-400 mr-5"
               >
                 Update
                 <GoUpload className="" />
               </button>
               {editing && (
-                <button onClick={() => setEditing(false)} className="btn  mr-1">
+                <button
+                  onClick={() => setEditing(false)}
+                  className="rounded-full hover:bg-black border-[1px] border-white  p-4 hover:bg-transparent"
+                >
                   <MdOutlineCancel />
                 </button>
               )}
             </div>
           ) : (
-            <button
-              onClick={() => setEditing(true)}
-              className="rounded-full flex items-center justify-center p-4  bg-[#7F27FF] hover:text-white hover:scale-95 text-white mr-2"
-            >
-              <AiFillEdit />
-            </button>
+            <div className="absolute left-[240px] mb-10">
+              <button
+                onClick={() => setEditing(true)}
+                className="rounded-full  p-4  bg-[#7F27FF] hover:text-white hover:scale-95 text-white"
+              >
+                <AiFillEdit />
+              </button>
+            </div>
           )}
-          <div className="flex items-center text-end">
-            <button
-              onClick={() => handleDelete(task?._id)}
-              className="rounded-full hover:bg-black border-[1px] border-white flex items-center justify-center p-4 hover:bg-transparent  text-white mr-1"
-            >
-              <MdOutlineDelete />
-            </button>
-          </div>
+          {!editing && (
+            <div className="absolute left-[300px] mb-10">
+              <button
+                onClick={() => handleDelete(task?._id)}
+                className="rounded-full hover:bg-black border-[1px] border-white p-4 hover:bg-transparent text-white mr-1"
+              >
+                <MdOutlineDelete />
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

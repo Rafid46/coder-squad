@@ -8,18 +8,11 @@ import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import useAxios from "../../Hooks/useAxios";
 
-const CreateTask = () => {
+const CreateTask = ({ refetch }) => {
   const { user } = useContext(AuthContext);
   const { register, handleSubmit, reset } = useForm();
   const axiosPublic = useAxios();
-  const queryClient = useQueryClient();
-  const { refetch } = useQuery({
-    queryKey: ["tasks"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/todo/tasks?email=${user?.email}`);
-      return res.data;
-    },
-  });
+  // const queryClient = useQueryClient();
   const onSubmit = (data) => {
     console.log(data);
     const taskData = {
@@ -31,8 +24,10 @@ const CreateTask = () => {
       status: "Todo",
     };
     axiosPublic.post("/todo/tasks", taskData).then((res) => {
+      refetch();
+      document.getElementById("my_modal_1").close();
       console.log(res.data, "task added");
-      reset(), queryClient.invalidateQueries(["tasks"]);
+      reset();
     });
   };
 

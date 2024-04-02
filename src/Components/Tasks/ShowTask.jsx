@@ -15,6 +15,8 @@ import { MdOutlineCancel } from "react-icons/md";
 import { GoUpload } from "react-icons/go";
 import { useQueryClient } from "@tanstack/react-query";
 import useAxios from "../../Hooks/useAxios";
+import { AiFillEdit } from "react-icons/ai";
+import { MdOutlineDelete } from "react-icons/md";
 const ShowTask = ({ task }) => {
   const axiosPublic = useAxios();
   //   const { data: tasks = [] } = useQuery({
@@ -231,29 +233,26 @@ const ShowTask = ({ task }) => {
               </button>
               {editing && (
                 <button onClick={() => setEditing(false)} className="btn  mr-1">
-                  cancel
-                  <MdOutlineCancel className="" />
+                  <MdOutlineCancel />
                 </button>
               )}
             </div>
           ) : (
-            <div>
-              <button
-                onClick={() => setEditing(true)}
-                className="btn rounded-md  bg-[#7F27FF] hover:text-white hover:scale-95 border-none  text-white mr-2"
-              >
-                Edit
-                <CiEdit className="" />
-              </button>
-            </div>
+            <button
+              onClick={() => setEditing(true)}
+              className="rounded-full flex items-center justify-center p-4  bg-[#7F27FF] hover:text-white hover:scale-95 text-white mr-2"
+            >
+              <AiFillEdit />
+            </button>
           )}
-          <button
-            onClick={() => handleDelete(task?._id)}
-            className="btn rounded-md border-[1px] hover:text-white hover:bg-transparent  text-white mr-1 bg-transparent border-gray-100"
-          >
-            Delete
-            <MdOutlineDeleteOutline className="text-white" />
-          </button>
+          <div className="flex items-center text-end">
+            <button
+              onClick={() => handleDelete(task?._id)}
+              className="rounded-full hover:bg-black border-[1px] border-white flex items-center justify-center p-4 hover:bg-transparent  text-white mr-1"
+            >
+              <MdOutlineDelete />
+            </button>
+          </div>
         </div>
       </div>
     </div>

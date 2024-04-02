@@ -40,7 +40,7 @@ const AllTasks = () => {
             <p>No tasks found.</p>
           ) : (
             tasks?.map((task) => (
-              <ShowTask key={task.id} task={task} refetch={refetch} />
+              <ShowTask key={task?.id} task={task} refetch={refetch} />
             ))
           )}
         </div>

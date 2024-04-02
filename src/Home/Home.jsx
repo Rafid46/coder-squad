@@ -1,29 +1,33 @@
-import {useContext, useEffect} from "react";
+import { useContext, useEffect } from "react";
 import useAxios from "../Hooks/useAxios";
 
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../Provider/AuthProvider";
 import AllTasks from "../Components/Tasks/AllTasks";
-
 const Home = () => {
   const axiosPublic = useAxios();
   const user = useContext(AuthContext);
-  const { data: tasks, refetch, isPending: loading } = useQuery({
+  const {
+    data: tasks,
+    refetch,
+    isPending: loading,
+  } = useQuery({
     queryKey: ["tasks-xyz"],
     queryFn: async () => {
       if (user?.user?.email) {
-        const res = await axiosPublic.get(`/todo/tasks/?email=${user?.user?.email}`);
+        const res = await axiosPublic.get(
+          `/todo/tasks/?email=${user?.user?.email}`
+        );
         return res.data;
       }
-
-      return null
+      return null;
     },
-    enabled: false
+    enabled: false,
   });
-
+  console.log(JSON.stringify(user, null, 2));
   useEffect(() => {
-    refetch()
-  }, [user?.user]);
+    refetch();
+  }, [user?.user?.email]);
 
   return (
     <div className="my-10 max-w-screen-xl mx-auto">

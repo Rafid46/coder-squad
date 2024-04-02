@@ -4,20 +4,19 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import ShowTask from "./ShowTask";
 import CreateTask from "./CreateTask";
 
-const AllTasks = ({loading, tasks, refetch}) => {
-
+const AllTasks = ({ loading, tasks, refetch }) => {
   return (
     <div>
       <div>
         <div className="grid grid-cols-1 lg:grid-cols-3 max-w-screen-xl mx-auto gap-10">
           {loading ? (
             <p>Loading...</p>
-          ) : tasks?.length === 0 ? (
-            <p>No tasks found.</p>
-          ) : (
-            tasks?.map((task) => (
-              <ShowTask key={task?.id} task={task} refetch={refetch} />
+          ) : tasks?.length > 0 ? (
+            tasks.map((task) => (
+              <ShowTask key={task.id} task={task} refetch={refetch} />
             ))
+          ) : (
+            <p>No tasks added.</p>
           )}
         </div>
       </div>

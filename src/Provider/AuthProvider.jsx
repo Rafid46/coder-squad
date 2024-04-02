@@ -9,7 +9,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-import { app } from "../../src/firebase.config";
+import { app } from "../firebase.config.js";
 const auth = getAuth(app);
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
@@ -51,13 +51,15 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signOut(auth);
   };
+
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      // console.log("current user", currentUser);
       if (currentUser) {
+        setUser(currentUser);
+        // console.log("current user", currentUser);
         const userInfo = { email: currentUser.email };
       } else {
+        setUser(null); // Reset user state if not authenticated
         localStorage.removeItem("access-token");
       }
       setLoading(false);
@@ -66,6 +68,7 @@ const AuthProvider = ({ children }) => {
       return unSubscribe;
     };
   }, []);
+
   const userInfo = {
     user,
     createUser,

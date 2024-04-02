@@ -1,35 +1,11 @@
 /* eslint-disable react/jsx-key */
-import { useQuery } from "@tanstack/react-query";
-import { useContext, useEffect, useState } from "react";
 
 import { IoIosAddCircleOutline } from "react-icons/io";
-import { AuthContext } from "../../Provider/AuthProvider";
-import useAxios from "../../Hooks/useAxios";
 import ShowTask from "./ShowTask";
 import CreateTask from "./CreateTask";
 
-const AllTasks = () => {
-  const user = useContext(AuthContext);
-  const [loading, setLoading] = useState(false);
-  console.log(user);
-  const axiosPublic = useAxios();
-  const {
-    data: tasks = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["tasks"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/todo/tasks/?email=${user?.email}`);
-      return res.data;
-    },
-  });
+const AllTasks = ({loading, tasks, refetch}) => {
 
-  useEffect(() => {
-    if (!isLoading) {
-      setLoading(false);
-    }
-  }, [isLoading]);
   return (
     <div>
       <div>

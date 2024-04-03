@@ -29,13 +29,9 @@ const Home = () => {
 
   useEffect(() => {
     refetch();
-  }, [user?.user]);
-  const handleButton = () => {
-    console.log(user);
-  };
+  }, [user?.user, refetch]);
   return (
     <div className="my-10 max-w-screen-xl mx-auto">
-      <button onClick={handleButton}>Button</button>
       <div className="flex items-center">
         {" "}
         <p className="text-5xl my-10 font-bold text-[#7F27FF] mr-4">Tasks</p>
@@ -53,14 +49,14 @@ const Home = () => {
           </span>
         </p>
       </p> */}
-      {!user && (
+      {/* {!user?.user && (
         <Link
           to="/login"
           className="bg-[#7F27FF] text-white px-6 py-3 rounded-lg text-lg font-semibold"
         >
           Get Started
         </Link>
-      )}
+      )} */}
       <div className="bg-cover bg-center rounded-lg">
         {loading ? (
           <div className="flex flex-row gap-2">

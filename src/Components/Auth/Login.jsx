@@ -3,9 +3,9 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
-import { toast } from "react-toastify";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { PiEyeSlash, PiEye } from "react-icons/pi";
+import { toast } from "react-hot-toast";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
@@ -35,9 +35,9 @@ const Login = () => {
   const handleGoogleSignIn = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
+        toast.success("Login successful! Welcome back!");
         const user = result.user;
         console.log(result.user);
-        toast.success("Login successful! Welcome back!");
         navigate("/");
       })
       .catch((error) => {

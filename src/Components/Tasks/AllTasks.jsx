@@ -8,7 +8,7 @@ const AllTasks = ({ loading, tasks, refetch }) => {
   return (
     <div>
       <div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 max-w-screen-xl mx-auto gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 max-w-screen-xl mx-auto">
           {loading ? (
             <p>Loading...</p>
           ) : tasks?.length > 0 ? (

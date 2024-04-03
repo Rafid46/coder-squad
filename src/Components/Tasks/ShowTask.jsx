@@ -94,13 +94,15 @@ const ShowTask = ({ task, refetch }) => {
     <div>
       <div
         className={`mt-10 w-96 rounded-[30px]  m-5 p-5 pt-5 pb-1 ${
-          task?.status === "Todo" ? "bg-[#F3B664]" : "bg-[#4CCD99]"
+          task?.status === "Todo" ? "bg-[#F3B664]" : "bg-[#68BB59]"
         }`}
       >
         <div className="mb-5 mx-auto border-gray-400 rounded-md">
           <div className=" ml-4 mb-5">
             <h1
-              className={`text-2xl text-zinc-800 text-start font-bold my-2 ${
+              className={`text-2xl ${
+                task?.status === "Todo" ? "text-[#EA5C2B]" : "text-[#004225]"
+              } text-start font-bold my-2 ${
                 task?.status === "Ongoing"
                   ? "text-pink-500"
                   : task?.status === "Complete"
@@ -126,7 +128,11 @@ const ShowTask = ({ task, refetch }) => {
           </div>
         </div>
         <div className="mb-8 min-h-[250px]">
-          <h3 className="mt-1 p-4 py-2  text-base text-zinc-800">
+          <h3
+            className={`mt-1 p-4 py-2  text-base ${
+              task?.status === "Todo" ? "text-[#FF9300]" : "text-[#C1F2B0]"
+            }`}
+          >
             {/* <span className="font-bold">Name : </span> */}
             {editing ? (
               <input
@@ -162,9 +168,9 @@ const ShowTask = ({ task, refetch }) => {
                 <div className="">
                   <div>
                     {showFullDescription ? (
-                      <span>{task?.description}</span>
+                      <span>{'"' + task?.description + '"'}</span>
                     ) : (
-                      <span>{truncatedDescription}</span>
+                      <span>{'"' + truncatedDescription + '"'}</span>
                     )}
                   </div>
                   <div>

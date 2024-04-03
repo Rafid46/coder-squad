@@ -4,10 +4,11 @@ import useAxios from "../Hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../Provider/AuthProvider";
 import AllTasks from "../Components/Tasks/AllTasks";
+import { Link } from "react-router-dom";
 const Home = () => {
   const axiosPublic = useAxios();
   const user = useContext(AuthContext);
-  const [isLoading, setIsLoading] = useState(true); // Renamed to isLoading
+  // const [isLoading, setIsLoading] = useState(true);
   const {
     data: tasks,
     refetch,
@@ -23,18 +24,18 @@ const Home = () => {
       }
       return null;
     },
-    enabled: !!user?.user?.email, // Enable query when user email is available
-    onSuccess: () => setIsLoading(false), // Update loading state when data is fetched
+    enabled: !!user?.user?.email,
   });
 
   useEffect(() => {
-    if (!loading) {
-      setIsLoading(false); // Update loading state based on isPending
-    }
-  }, [loading]);
-
+    refetch();
+  }, [user?.user]);
+  const handleButton = () => {
+    console.log(user);
+  };
   return (
     <div className="my-10 max-w-screen-xl mx-auto">
+      <button onClick={handleButton}>Button</button>
       <div className="flex items-center">
         {" "}
         <p className="text-5xl my-10 font-bold text-[#7F27FF] mr-4">Tasks</p>
@@ -52,9 +53,21 @@ const Home = () => {
           </span>
         </p>
       </p> */}
+      {!user && (
+        <Link
+          to="/login"
+          className="bg-[#7F27FF] text-white px-6 py-3 rounded-lg text-lg font-semibold"
+        >
+          Get Started
+        </Link>
+      )}
       <div className="bg-cover bg-center rounded-lg">
-        {isLoading ? (
-          <p>Loading.....</p>
+        {loading ? (
+          <div className="flex flex-row gap-2">
+            <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce"></div>
+            <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.3s]"></div>
+            <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.5s]"></div>
+          </div>
         ) : (
           <AllTasks loading={loading} tasks={tasks} refetch={refetch} />
         )}

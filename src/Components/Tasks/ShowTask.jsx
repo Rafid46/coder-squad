@@ -5,15 +5,7 @@
 import { useState } from "react";
 
 import Swal from "sweetalert2";
-import Lottie from "lottie-react";
-import ani from "../../assets/animation/todo.json";
-import ani2 from "../../assets/animation/ongoing.json";
-import ani3 from "../../assets/animation/completed.json";
-import { CiEdit } from "react-icons/ci";
-import { MdOutlineDeleteOutline } from "react-icons/md";
 import { MdOutlineCancel } from "react-icons/md";
-import { GoUpload } from "react-icons/go";
-import { useQueryClient } from "@tanstack/react-query";
 import useAxios from "../../Hooks/useAxios";
 import { AiFillEdit } from "react-icons/ai";
 import { MdOutlineDelete } from "react-icons/md";
@@ -100,9 +92,9 @@ const ShowTask = ({ task, refetch }) => {
         <div className="mb-5 mx-auto border-gray-400 rounded-md">
           <div className=" ml-4 mb-5">
             <h1
-              className={`text-2xl ${
+              className={`${
                 task?.status === "Todo" ? "text-[#EA5C2B]" : "text-[#004225]"
-              } text-start font-bold my-2 ${
+              } text-start text-3xl font-bold my-2 ${
                 task?.status === "Ongoing"
                   ? "text-pink-500"
                   : task?.status === "Complete"
@@ -148,7 +140,7 @@ const ShowTask = ({ task, refetch }) => {
               <span className="">{task?.name}</span>
             )}
           </h3>
-          <div className="mb-4 p-4 py-2 text-xl  text-zinc-800">
+          <div className="p-4 py-2 text-xl  text-zinc-800">
             {/* <span className="font-bold">Description :</span>{" "} */}
             <div className="flex items-center">
               {editing ? (
@@ -204,7 +196,7 @@ const ShowTask = ({ task, refetch }) => {
             )}
           </p>
           <p className="mb-4 p-4 py-2   text-sm text-zinc-800">
-            {/* <span className="font-bold">Priority :</span>{" "} */}
+            <span className="font-normal text-white">Priority : </span>{" "}
             {editing ? (
               <select
                 onChange={(e) =>

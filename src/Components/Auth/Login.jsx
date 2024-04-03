@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { PiEyeSlash, PiEye } from "react-icons/pi";
-import { toast } from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
@@ -37,16 +37,17 @@ const Login = () => {
       .then((result) => {
         toast.success("Login successful! Welcome back!");
         const user = result.user;
-        console.log(result.user);
+        // console.log(result.user);
         navigate("/");
       })
       .catch((error) => {
-        console.error(error);
         toast.error("Login failed. Check your credentials.");
+        // console.error(error);
       });
   };
   return (
-    <div className="font-poppins">
+    <div className="font-poppins flex  items-center justify-center h-screen">
+      <Toaster />
       <section>
         <div className="flex  items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-8">
           <div className="bg-gray-100 border-[1px] border-zinc-400 rounded-lg xl:mx-auto xl:w-96 px-9 py-8 xl:max-w-sm 2xl:max-w-md">

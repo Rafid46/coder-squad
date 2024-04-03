@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const { createUser } = useContext(AuthContext);
@@ -25,7 +25,7 @@ const Register = () => {
   };
 
   return (
-    <div>
+    <div className="flex  items-center justify-center h-screen">
       <div className="font-poppins">
         <section>
           <div className="flex  items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-8">
@@ -50,10 +50,17 @@ const Register = () => {
                     </label>
                     <div className="mt-2">
                       <input
-                        {...register("name")}
+                        {...register("name", {
+                          required: "Name is required",
+                        })}
                         placeholder="name"
                         className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                       />
+                      {errors.name && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {errors.name.message}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div>
@@ -62,11 +69,18 @@ const Register = () => {
                     </label>
                     <div className="mt-2">
                       <input
-                        {...register("email")}
+                        {...register("email", {
+                          required: "Email is required",
+                        })}
                         placeholder="Email"
                         type="email"
                         className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                       />
+                      {errors.email && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {errors.email.message}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div>
@@ -75,11 +89,18 @@ const Register = () => {
                     </label>
                     <div className="mt-2">
                       <input
-                        {...register("password")}
+                        {...register("password", {
+                          required: "Password is required",
+                        })}
                         placeholder="Password"
                         type="password"
                         className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                       />
+                      {errors.password && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {errors.password.message}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div>

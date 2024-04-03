@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-key */
 
 import { IoIosAddCircleOutline } from "react-icons/io";
@@ -11,17 +12,16 @@ const AllTasks = ({ tasks, refetch }) => {
       <div>
         <div className="grid grid-cols-1 lg:grid-cols-3 max-w-screen-xl mx-auto">
           {tasks.map((task) => (
-              <AnimatePresence>
-                <motion.div
-                  initial={{ opacity: 1 }}
-                  exit={{ opacity: 0, scale: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ShowTask key={task.id} task={task} refetch={refetch} />
-                </motion.div>
-              </AnimatePresence>
-            ))
-          }
+            <AnimatePresence>
+              <motion.div
+                initial={{ opacity: 1 }}
+                exit={{ opacity: 0, scale: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <ShowTask key={task.id} task={task} refetch={refetch} />
+              </motion.div>
+            </AnimatePresence>
+          ))}
         </div>
       </div>
       <div className="">

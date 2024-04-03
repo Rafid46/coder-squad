@@ -35,12 +35,12 @@ const CreateTask = ({ refetch }) => {
     <div>
       <div>
         <dialog id="my_modal_1" className="modal">
-          <div className="modal-box shadow-lg backdrop-blur-sm bg-opacity-20 bg-white w-fit px-10 rounded-md">
+          <div className="modal-box shadow-lg backdrop-blur-sm bg-opacity-20 bg-white w-fit px-10 rounded-3xl">
             <div className="modal-action w-fit p-0 mx-auto">
               <form onSubmit={handleSubmit(onSubmit)} className="">
                 <div className="mb-5">
                   <form method="dialog">
-                    <button className="text-xl btn bg-transparent hover:text-red-400 text-white border-none absolute hover:bg-transparent right-[5px] top-0">
+                    <button className="text-xl mt-5 mr-5 bg-transparent hover:text-red-400 text-white border-none absolute hover:bg-transparent right-[5px] top-0">
                       <RxCross1 />
                     </button>
                   </form>
@@ -89,7 +89,7 @@ const CreateTask = ({ refetch }) => {
                 <br />
                 <button
                   type="submit"
-                  className="bg-purple-500 text-sm text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-purple-700 active:bg-purple-900 focus:outline-none"
+                  className="mb-5 bg-purple-500 text-sm text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-purple-700 active:bg-purple-900 focus:outline-none"
                 >
                   Create task
                 </button>

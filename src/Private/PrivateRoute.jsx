@@ -11,11 +11,8 @@ const PrivateRoute = ({ children }) => {
   if (loading) {
     // return <span className="loading loading-spinner text-accent"></span>;
     return (
-      <div
-        className="loader  rounded-full w-screen h-screen animate-spin
-aspect-square  flex justify-center items-center text-yellow-700"
-      >
-        <p>loading</p>
+      <div className="flex items-center justify-center h-screen">
+        <span className="loading loading-ring loading-lg"></span>
       </div>
     );
   }

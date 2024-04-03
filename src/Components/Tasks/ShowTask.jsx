@@ -85,7 +85,7 @@ const ShowTask = ({ task, refetch }) => {
   return (
     <div>
       <div
-        className={`mt-10 w-96 rounded-[30px]  m-5 p-5 pt-5 pb-1 ${
+        className={`mx-auto lg:mx-0 mt-10 w-96 rounded-[30px]  p-5 pt-5 pb-1 ${
           task?.status === "Todo" ? "bg-[#F3B664]" : "bg-[#68BB59]"
         }`}
       >
@@ -94,13 +94,7 @@ const ShowTask = ({ task, refetch }) => {
             <h1
               className={`${
                 task?.status === "Todo" ? "text-[#EA5C2B]" : "text-[#004225]"
-              } text-start text-3xl font-bold my-2 ${
-                task?.status === "Ongoing"
-                  ? "text-pink-500"
-                  : task?.status === "Complete"
-                  ? "text-teal-300"
-                  : "text-white"
-              }`}
+              } text-start text-3xl font-bold my-2`}
             >
               {task?.status}
             </h1>
@@ -179,7 +173,7 @@ const ShowTask = ({ task, refetch }) => {
               )}
             </div>
           </div>
-          <hr className="w-1/2 ml-4 bg-gray-600" />
+          <hr className="w-[100px] ml-4 bg-gray-600" />
           <p className="p-4 py-2   text-xs text-zinc-800">
             <span className="font-bold">DeadLine :</span>{" "}
             {editing ? (
@@ -214,9 +208,9 @@ const ShowTask = ({ task, refetch }) => {
               <span
                 className={`${
                   task?.priority === "Low"
-                    ? "text-blue-600 font-semibold"
+                    ? "text-blue-600 font-semibold bg-white  px-4 py-1 rounded-2xl"
                     : task?.priority === "Moderate"
-                    ? "text-purple-600 font-semibold"
+                    ? "text-purple-600 font-semibold bg-white  px-4 py-1 rounded-2xl"
                     : "text-red-600 font-semibold bg-white  px-4 py-1 rounded-2xl"
                 }`}
               >
@@ -228,7 +222,7 @@ const ShowTask = ({ task, refetch }) => {
             {task?.status === "Todo" && (
               <button
                 onClick={() => handleComplete(task)}
-                className="mt-2 overflow-hidden relative w-28  py-3  bg-[#190B14] text-white border-none rounded-md text-sm font-medium cursor-pointer group"
+                className="ml-4 mt-2 overflow-hidden relative w-28  py-3  bg-[#190B14] text-white border-none rounded-2xl text-sm font-medium cursor-pointer group"
               >
                 Make it
                 <span className="absolute w-28 h-28 -top-8 -left-2 bg-white rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-left"></span>

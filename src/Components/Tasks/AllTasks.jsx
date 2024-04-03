@@ -5,13 +5,12 @@ import ShowTask from "./ShowTask";
 import CreateTask from "./CreateTask";
 import { AnimatePresence, motion } from "framer-motion";
 
-const AllTasks = ({ loading, tasks, refetch }) => {
+const AllTasks = ({ tasks, refetch }) => {
   return (
     <div>
       <div>
         <div className="grid grid-cols-1 lg:grid-cols-3 max-w-screen-xl mx-auto">
-          {tasks?.length > 0 ? (
-            tasks.map((task) => (
+          {tasks.map((task) => (
               <AnimatePresence>
                 <motion.div
                   initial={{ opacity: 1 }}
@@ -22,9 +21,7 @@ const AllTasks = ({ loading, tasks, refetch }) => {
                 </motion.div>
               </AnimatePresence>
             ))
-          ) : (
-            <p>No tasks added.</p>
-          )}
+          }
         </div>
       </div>
       <div className="">

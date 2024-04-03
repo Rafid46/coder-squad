@@ -92,11 +92,15 @@ const ShowTask = ({ task, refetch }) => {
       : task?.description;
   return (
     <div>
-      <div className="mt-10 w-96 rounded-[30px] bg-transparent m-5 border-2 border-gray-300 p-5 pt-5 pb-0">
-        <div className="mb-5 shadow-lg backdrop-blur-sm bg-opacity-20 bg-white h-[90px] mx-auto gap-5 border-gray-400 rounded-md p-2">
-          <div className="flex items-center justify-evenly mb-5">
+      <div
+        className={`mt-10 w-96 rounded-[30px]  m-5 p-5 pt-5 pb-1 ${
+          task?.status === "Todo" ? "bg-[#F3B664]" : "bg-[#4CCD99]"
+        }`}
+      >
+        <div className="mb-5 mx-auto border-gray-400 rounded-md">
+          <div className=" ml-4 mb-5">
             <h1
-              className={`text-3xl text-center font-bold my-2 ${
+              className={`text-2xl text-zinc-800 text-start font-bold my-2 ${
                 task?.status === "Ongoing"
                   ? "text-pink-500"
                   : task?.status === "Complete"
@@ -108,21 +112,21 @@ const ShowTask = ({ task, refetch }) => {
             </h1>
             {task?.status === "Todo" ? (
               <div className="w-[100px]">
-                <Lottie animationData={ani} loop={true}></Lottie>
+                {/* <Lottie animationData={ani} loop={true}></Lottie> */}
               </div>
             ) : task?.status === "Ongoing" ? (
               <div className="w-[100px]">
-                <Lottie animationData={ani2} loop={true}></Lottie>
+                {/* <Lottie animationData={ani2} loop={true}></Lottie> */}
               </div>
             ) : (
               <div className="w-[70px]">
-                <Lottie animationData={ani3} loop={true}></Lottie>
+                {/* <Lottie animationData={ani3} loop={true}></Lottie> */}
               </div>
             )}
           </div>
         </div>
         <div className="mb-8 min-h-[250px]">
-          <h3 className="mt-1 mb-4 p-4 py-2  text-sm text-white shadow-sm">
+          <h3 className="mt-1 p-4 py-2  text-base text-zinc-800">
             {/* <span className="font-bold">Name : </span> */}
             {editing ? (
               <input
@@ -138,8 +142,8 @@ const ShowTask = ({ task, refetch }) => {
               <span className="">{task?.name}</span>
             )}
           </h3>
-          <div className="mt-1 mb-4 p-4 py-2 border-[1px]   border-gray-300 rounded-md  text-sm text-white shadow-sm">
-            <span className="font-bold">Description :</span>{" "}
+          <div className="mb-4 p-4 py-2 text-xl  text-zinc-800">
+            {/* <span className="font-bold">Description :</span>{" "} */}
             <div className="flex items-center">
               {editing ? (
                 <textarea
@@ -155,25 +159,30 @@ const ShowTask = ({ task, refetch }) => {
                   }
                 ></textarea>
               ) : (
-                <>
-                  {showFullDescription ? (
-                    <span>{task?.description}</span>
-                  ) : (
-                    <span>{truncatedDescription}</span>
-                  )}
-                  {task?.description.length > 24 && !editing && (
-                    <button
-                      onClick={toggleDescription}
-                      className="text-blue-500 ml-2 cursor-pointer focus:outline-none"
-                    >
-                      {showFullDescription ? "Show less" : "Show more"}
-                    </button>
-                  )}
-                </>
+                <div className="">
+                  <div>
+                    {showFullDescription ? (
+                      <span>{task?.description}</span>
+                    ) : (
+                      <span>{truncatedDescription}</span>
+                    )}
+                  </div>
+                  <div>
+                    {task?.description.length > 24 && !editing && (
+                      <button
+                        onClick={toggleDescription}
+                        className="text-gray-200 text-xs cursor-pointer focus:outline-none"
+                      >
+                        {showFullDescription ? "Show less" : "Show more"}
+                      </button>
+                    )}
+                  </div>
+                </div>
               )}
             </div>
           </div>
-          <p className="mt-1 mb-4 p-4 py-2 border-[1px]   border-gray-300 rounded-md  text-sm text-white shadow-sm">
+          <hr className="w-1/2 ml-4 bg-gray-600" />
+          <p className="p-4 py-2   text-xs text-zinc-800">
             <span className="font-bold">DeadLine :</span>{" "}
             {editing ? (
               <input
@@ -188,8 +197,8 @@ const ShowTask = ({ task, refetch }) => {
               <span>{task?.deadline}</span>
             )}
           </p>
-          <p className="mt-1 mb-4 p-4 py-2 border-[1px]   border-gray-300 rounded-md  text-sm text-white shadow-sm">
-            <span className="font-bold">Priority :</span>{" "}
+          <p className="mb-4 p-4 py-2   text-sm text-zinc-800">
+            {/* <span className="font-bold">Priority :</span>{" "} */}
             {editing ? (
               <select
                 onChange={(e) =>
@@ -207,10 +216,10 @@ const ShowTask = ({ task, refetch }) => {
               <span
                 className={`${
                   task?.priority === "Low"
-                    ? "text-blue-600 font-bold"
+                    ? "text-blue-600 font-semibold"
                     : task?.priority === "Moderate"
-                    ? "text-green-400 font-bold"
-                    : "text-red-600 font-bold"
+                    ? "text-purple-600 font-semibold"
+                    : "text-red-600 font-semibold bg-white  px-4 py-1 rounded-2xl"
                 }`}
               >
                 {task?.priority}
@@ -240,15 +249,23 @@ const ShowTask = ({ task, refetch }) => {
               <button
                 type="submit"
                 onClick={() => handleUpdate(task?._id)}
-                className="btn border-2 bg-transparent text-teal-400 mr-5"
+                className="inline-block py-2 px-6 rounded-l-xl rounded-t-xl bg-[#7747FF] hover:bg-white hover:text-[#7747FF] focus:text-[#7747FF] focus:bg-gray-200 text-gray-50 font-bold leading-loose transition duration-200 mr-4"
+              >
+                Update
+                {/* <GoUpload className="" /> */}
+              </button>
+              {/* 
+              <button
+                type="submit"
+                className="btn border-[1px] rounded-xl bg-transparent text-white  mr-4"
               >
                 Update
                 <GoUpload className="" />
-              </button>
+              </button> */}
               {editing && (
                 <button
                   onClick={() => setEditing(false)}
-                  className="rounded-full hover:bg-black border-[1px] border-white  p-4 hover:bg-transparent"
+                  className="rounded-full  border-[1px] border-white  p-4 hover:bg-white"
                 >
                   <MdOutlineCancel />
                 </button>
@@ -268,7 +285,7 @@ const ShowTask = ({ task, refetch }) => {
             <div className="absolute left-[300px] mb-10">
               <button
                 onClick={() => handleDelete(task?._id)}
-                className="rounded-full hover:bg-black border-[1px] border-white p-4 hover:bg-transparent text-white mr-1"
+                className="rounded-full hover:text-black border-[1px] border-white p-4 hover:bg-white text-white mr-1"
               >
                 <MdOutlineDelete />
               </button>

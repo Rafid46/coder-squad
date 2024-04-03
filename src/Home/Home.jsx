@@ -39,7 +39,7 @@ const Home = () => {
         {" "}
         <p className="text-5xl my-10 font-bold text-[#7F27FF] mr-4">Tasks</p>
       </div>
-      <p className="w-fit py-2 px-5 mb-3 border-[1px] border-gray-400 rounded-lg">
+      {/* <p className="w-fit py-2 px-5 mb-3 border-[1px] border-gray-400 rounded-lg">
         <p className="text-xl text-purple-500 font-semibold">
           Total tasks:
           <span> {tasks?.length}</span>
@@ -51,8 +51,8 @@ const Home = () => {
             {tasks?.filter((task) => task?.status === "Completed").length}
           </span>
         </p>
-      </p>
-      <div className="bg-cover bg-center h-[900px] py-10 rounded-lg">
+      </p> */}
+      <div className="bg-cover bg-center rounded-lg">
         {isLoading ? (
           <p>Loading.....</p>
         ) : (

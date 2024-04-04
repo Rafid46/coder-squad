@@ -4,6 +4,8 @@ import useAxios from "../Hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../Provider/AuthProvider";
 import AllTasks from "../Components/Tasks/AllTasks";
+import { IoIosAddCircleOutline } from "react-icons/io";
+import CreateTask from "../Components/Tasks/CreateTask";
 const Home = () => {
   const axiosPublic = useAxios();
   const user = useContext(AuthContext);
@@ -54,6 +56,25 @@ const Home = () => {
         ) : (
           <p className="text-gray-400">No Tasks Added!</p>
         )}
+      </div>
+      <div className="">
+        <div className="">
+          <button
+            onClick={() => document.getElementById("my_modal_1").showModal()}
+            className="btn hover:text-gray-900 drawer-button rounded-full bg-purple-500 border-none z-50 rounded-tr-none rounded-br-none"
+            style={{
+              position: "fixed",
+              right: "0px",
+              bottom: "30px",
+            }}
+          >
+            <span className="text-3xl text-white">
+              <IoIosAddCircleOutline />
+            </span>
+            <p className=" text-white">create</p>
+          </button>
+        </div>
+        <CreateTask refetch={refetch}></CreateTask>
       </div>
     </div>
   );

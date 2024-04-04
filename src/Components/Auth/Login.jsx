@@ -11,7 +11,7 @@ const Login = () => {
   const navigate = useNavigate();
   //   const location = useLocation();
   const { user } = useContext(AuthContext);
-  console.log(user?.displayName);
+  // console.log(user?.displayName);
   //   const from = location.state?.from?.pathname || "/";
   const { signInUser } = useContext(AuthContext);
   const auth = getAuth();

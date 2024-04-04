@@ -14,7 +14,7 @@ const CreateTask = ({ refetch }) => {
   const axiosPublic = useAxios();
   // const queryClient = useQueryClient();
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     const taskData = {
       email: user?.email,
       name: data.name,

@@ -12,16 +12,9 @@ import { MdOutlineDelete } from "react-icons/md";
 const ShowTask = ({ task, refetch }) => {
   const [showFullDescription, setShowFullDescription] = useState(false);
   const axiosPublic = useAxios();
-  //   const { data: tasks = [] } = useQuery({
-  //     queryKey: ["tasks"],
-  //     queryFn: async () => {
-  //       const res = await axiosPublic.get("/todo/tasks");
-  //       return res.data;
-  //     },
-  //   });
   const [editing, setEditing] = useState(false);
   const [inputValue, setInputValue] = useState(task);
-  console.log(inputValue);
+  // console.log(inputValue);
   //   console.log(isDragging);
   const handleDelete = (id) => {
     Swal.fire({
@@ -36,7 +29,7 @@ const ShowTask = ({ task, refetch }) => {
       if (result.isConfirmed) {
         axiosPublic.delete(`/todo/tasks/${id}`).then((res) => {
           refetch();
-          console.log(res.data);
+          // console.log(res.data);
 
           Swal.fire({
             title: "Deleted!",
@@ -51,7 +44,7 @@ const ShowTask = ({ task, refetch }) => {
   const handleUpdate = (id) => {
     axiosPublic.patch(`/todo/tasks/update/${id}`, inputValue).then((res) => {
       refetch();
-      console.log(res.data);
+      // console.log(res.data);
       Swal.fire({
         position: "bottom-end",
         icon: "success",
@@ -69,7 +62,7 @@ const ShowTask = ({ task, refetch }) => {
     //   status: "Complete",
     // };
     axiosPublic.patch(`/todo/tasks/complete/${task._id}`).then((res) => {
-      console.log(res);
+      // console.log(res);
       refetch();
       Swal.fire("Task complete");
     });

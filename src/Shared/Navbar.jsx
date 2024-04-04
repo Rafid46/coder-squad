@@ -12,11 +12,11 @@ const Navbar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
   const { user, logOut } = useContext(AuthContext);
-  console.log(user);
+  // console.log(user);
   const handleSignOut = () => {
     logOut()
       .then((result) => {
-        console.log(result.user);
+        // console.log(result.user);
         return swal("", "Logout successfully", "success");
       })
       .catch((error) => {

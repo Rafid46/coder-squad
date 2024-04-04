@@ -1,9 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-key */
 
-import { IoIosAddCircleOutline } from "react-icons/io";
 import ShowTask from "./ShowTask";
-import CreateTask from "./CreateTask";
 import { AnimatePresence, motion } from "framer-motion";
 
 const AllTasks = ({ tasks, refetch }) => {

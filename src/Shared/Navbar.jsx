@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useState } from "react";
 import { CiMenuBurger } from "react-icons/ci";
 import { Link, NavLink, useLocation } from "react-router-dom";

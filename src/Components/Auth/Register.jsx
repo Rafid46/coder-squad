@@ -16,12 +16,16 @@ const Register = () => {
   const onSubmit = (data) => {
     console.log(data);
     const { email, password, name } = data;
-    createUser(email, password, name).then((result) => {
-      navigate("/");
-      toast.success("Account created successfully!");
-      // const loggedUser = result.user;
-      // console.log(loggedUser);
-    });
+    createUser(email, password, name)
+      .then((result) => {
+        toast.success("Account created successfully!");
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error("Error creating user:", error);
+      });
   };
 
   return (

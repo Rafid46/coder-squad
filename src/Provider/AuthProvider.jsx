@@ -58,7 +58,7 @@ const AuthProvider = ({ children }) => {
         // console.log("current user", currentUser);
         const userInfo = { email: currentUser.email };
       } else {
-        setUser(null); // Reset user state if not authenticated
+        setUser(null);
         localStorage.removeItem("access-token");
       }
       setLoading(false);

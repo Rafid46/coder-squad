@@ -264,7 +264,7 @@ const ShowTask = ({ task, refetch }) => {
               )}
             </div>
           ) : (
-            <div className="absolute left-[240px] mb-10">
+            <div className="absolute left-[240px] mb-7">
               <button
                 onClick={() => setEditing(true)}
                 className="rounded-full  p-4  bg-[#7F27FF] hover:text-white hover:scale-95 text-white"
@@ -274,7 +274,7 @@ const ShowTask = ({ task, refetch }) => {
             </div>
           )}
           {!editing && (
-            <div className="absolute left-[300px] mb-10">
+            <div className="absolute left-[301px] mb-7">
               <button
                 onClick={() => handleDelete(task?._id)}
                 className="rounded-full hover:text-black border-[1px] border-white p-4 hover:bg-white text-white mr-1"

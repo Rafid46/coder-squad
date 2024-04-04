@@ -28,7 +28,11 @@ const Login = () => {
         return;
       })
       .catch((error) => {
-        toast.error("Invalid gmail, Please check your credentials");
+        if (error.code === "auth/wrong-password") {
+          toast.error("The password you entered is incorrect");
+        } else {
+          toast.error("Invalid gmail, Please check your credentials");
+        }
         return;
       });
   };
